@@ -19,7 +19,7 @@ import java.util.zip.*;
 /** Library on disk: packmixer/library/<collection>/<style>/{style.json, assets/...}. A selection is composed into resourcepacks/PackMixer. */
 public final class Library {
     public static class StyleDef { String name; float hue, sat = 1, bri = 1; String mul = "FFFFFF"; }
-    public static class Col { public String id, name, group = "main", preview; List<String> globs = List.of(), tint = List.of(); List<StyleDef> styles = List.of(); }
+    public static class Col { public String id, name, group = "main", preview, alt, cube, side; List<String> globs = List.of(), tint = List.of(); List<StyleDef> styles = List.of(); }
     public static class Style { public String col, id, name, author; public boolean builtin; transient Path dir; }
     static class Root { List<Col> collections; }
 
@@ -46,6 +46,8 @@ public final class Library {
     public static void init(MinecraftClient mc) {
         try (var r = new InputStreamReader(Library.class.getResourceAsStream("/packmixer/collections.json"))) { cols = G.fromJson(r, Root.class).collections; }
         catch (Exception e) { throw new RuntimeException(e); }
+        purgeIfOutdated();
+        Ui.load();
         sel = read("selection.json", new TypeToken<Map<String, String>>() {}.getType(), new HashMap<>());
         favs = read("favorites.json", new TypeToken<Set<String>>() {}.getType(), new HashSet<>());
         presets = read("presets.json", new TypeToken<Map<String, Map<String, String>>>() {}.getType(), new HashMap<>());
@@ -60,7 +62,7 @@ public final class Library {
     /** Built-in styles are original recolours generated from the vanilla textures on this machine. */
     static void makeBuiltin(MinecraftClient mc, Col c, StyleDef d, Path dir) {
         try {
-            var pack = mc.getDefaultResourcePack();
+            var pack = mc.getDefaultResourcePack(); int n = 0;
             for (String f : c.tint) {
                 var in = pack.open(ResourceType.CLIENT_RESOURCES, Identifier.of("minecraft", f));
                 if (in == null) continue;
@@ -70,12 +72,11 @@ public final class Library {
                 tint(img, d);
                 Path out = dir.resolve("assets/minecraft/" + f);
                 Files.createDirectories(out.getParent());
-                ImageIO.write(img, "png", out.toFile());
+                ImageIO.write(img, "png", out.toFile()); n++;
                 var meta = pack.open(ResourceType.CLIENT_RESOURCES, Identifier.of("minecraft", f + ".mcmeta"));
                 if (meta != null) try (var is = meta.get()) { Files.copy(is, Path.of(out + ".mcmeta"), StandardCopyOption.REPLACE_EXISTING); }
             }
-            Style s = new Style(); s.name = d.name; s.author = "Pack Mixer"; s.builtin = true;
-            write(dir.resolve("style.json"), s);
+            if (n > 0) { Style s = new Style(); s.name = d.name; s.author = "Pack Mixer"; s.builtin = true; write(dir.resolve("style.json"), s); }
         } catch (Exception e) { e.printStackTrace(); }
     }
 
@@ -107,11 +108,75 @@ public final class Library {
 
     public static Path previewPath(Col c, Style s) {
         return PREV.computeIfAbsent(s.dir, k -> {
-            Path p = k.resolve("assets/minecraft/" + c.preview);
-            if (Files.exists(p)) return Optional.of(p);
+            if (c.cube != null) { Path q = cube(c, s); if (q != null) return Optional.of(q); }
+            for (String rel : new String[]{c.preview, c.alt}) {
+                if (rel == null) continue;
+                Path p = k.resolve("assets/minecraft/" + rel);
+                if (Files.exists(p)) return Optional.of(p);
+            }
             try (var w = Files.walk(k.resolve("assets"))) { return w.filter(x -> x.toString().endsWith(".png")).findFirst(); }
             catch (IOException e) { return Optional.empty(); }
         }).orElse(null);
+    }
+
+    static BufferedImage sq(BufferedImage i) { int w = i.getWidth(); return i.getHeight() > w ? i.getSubimage(0, 0, w, w) : i; }
+
+    /** Renders an isometric block preview (top + two sides) of a style's texture into preview-cube.png. */
+    static Path cube(Col c, Style s) {
+        Path out = s.dir.resolve("preview-cube.png");
+        if (Files.exists(out)) return out;
+        try {
+            if (c.preview == null) return null;
+            Path base = s.dir.resolve("assets/minecraft"), p = base.resolve(c.preview);
+            if (!Files.exists(p)) return null;
+            BufferedImage top, left, right, t = ImageIO.read(p.toFile());
+            if ("crystal".equals(c.cube)) {   // glass cube inside the end crystal sheet (64x32 layout, any scale)
+                int e = Math.round(8 * t.getWidth() / 64f);
+                top = t.getSubimage(e, 0, e, e); left = t.getSubimage(e, e, e, e); right = t.getSubimage(2 * e, e, e, e);
+            } else {
+                top = sq(t); Path sp = c.side == null ? p : base.resolve(c.side); if (!Files.exists(sp)) sp = p;
+                left = right = sq(ImageIO.read(sp.toFile()));
+            }
+            BufferedImage o = new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB);
+            for (int y = 0; y < 64; y++) for (int x = 0; x < 64; x++) {
+                double a = (x + .5 - 32) / 32, b = (y + .5 - 16) / 16, u, v, sh; BufferedImage src;
+                if (Math.abs(a) + Math.abs(b) <= 1) { src = top; u = (a + b + 1) / 2; v = (b - a + 1) / 2; sh = 1; }
+                else if (x < 32) { double yt = 16 + (x + .5) / 2; if (y + .5 < yt || y + .5 >= yt + 32) continue; src = left; u = (x + .5) / 32; v = (y + .5 - yt) / 32; sh = .8; }
+                else { double yt = 32 - (x + .5 - 32) / 2; if (y + .5 < yt || y + .5 >= yt + 32) continue; src = right; u = (x + .5 - 32) / 32; v = (y + .5 - yt) / 32; sh = .58; }
+                int px = src.getRGB(Math.min(src.getWidth() - 1, (int) (u * src.getWidth())), Math.min(src.getHeight() - 1, (int) (v * src.getHeight())));
+                int al = px >>> 24; if (al == 0) continue;
+                o.setRGB(x, y, al << 24 | (int) ((px >> 16 & 255) * sh) << 16 | (int) ((px >> 8 & 255) * sh) << 8 | (int) ((px & 255) * sh));
+            }
+            ImageIO.write(o, "png", out.toFile()); return out;
+        } catch (Exception e) { return null; }
+    }
+
+    /** 1.21.11 moved the sun/moon into textures/environment/celestial/. Convert older sky packs so they still work. */
+    static void legacySky(Path mc) {
+        try {
+            Path env = mc.resolve("textures/environment"), cel = env.resolve("celestial"), sun = env.resolve("sun.png"), moon = env.resolve("moon_phases.png");
+            if (Files.exists(sun) && !Files.exists(cel.resolve("sun.png"))) { Files.createDirectories(cel); Files.copy(sun, cel.resolve("sun.png")); }
+            if (Files.exists(moon) && !Files.exists(cel.resolve("moon/full_moon.png"))) {
+                BufferedImage m = ImageIO.read(moon.toFile()); int w = m.getWidth() / 4, h = m.getHeight() / 2;
+                String[] n = {"full_moon", "waning_gibbous", "third_quarter", "waning_crescent", "new_moon", "waxing_crescent", "first_quarter", "waxing_gibbous"};
+                Files.createDirectories(cel.resolve("moon"));
+                for (int i = 0; i < 8; i++) ImageIO.write(m.getSubimage(i % 4 * w, i / 4 * h, w, h), "png", cel.resolve("moon/" + n[i] + ".png").toFile());
+            }
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    static final String VER = "4";
+    /** Built-in styles are regenerated when the mod's catalogue changes. Imported styles are never touched. */
+    static void purgeIfOutdated() {
+        Path f = ROOT.resolve("version.txt");
+        try {
+            if (Files.exists(f) && Files.readString(f).trim().equals(VER)) return;
+            if (Files.isDirectory(LIB)) for (Path cd : Files.list(LIB).toList()) if (Files.isDirectory(cd)) for (Path d : Files.list(cd).toList()) {
+                Path j = d.resolve("style.json");
+                if (Files.exists(j) && G.fromJson(Files.readString(j), Style.class).builtin) deleteTree(d);
+            }
+            Files.createDirectories(ROOT); Files.writeString(f, VER);
+        } catch (Exception e) { e.printStackTrace(); }
     }
 
     /** Splits any resource pack zip into per-collection styles. Returns number of components extracted, or -1 on failure. */
@@ -155,7 +220,7 @@ public final class Library {
             for (var e : sel.entrySet()) {
                 Style s = styles.getOrDefault(e.getKey(), List.of()).stream().filter(x -> x.id.equals(e.getValue())).findFirst().orElse(null);
                 if (s == null) continue;
-                Path src = s.dir.resolve("assets");
+                Path src = s.dir.resolve("assets"); if (!Files.isDirectory(src)) continue;
                 try (var w = Files.walk(src)) {
                     for (Path p : (Iterable<Path>) w::iterator) if (Files.isRegularFile(p)) {
                         Path t = out.resolve("assets").resolve(src.relativize(p).toString());
@@ -164,6 +229,7 @@ public final class Library {
                 }
             }
         } catch (IOException e) { e.printStackTrace(); }
+        legacySky(out.resolve("assets/minecraft"));
         var o = mc.options; o.resourcePacks.remove(PACK_ID); o.resourcePacks.add(PACK_ID); o.write();
         var m = mc.getResourcePackManager(); m.scanPacks(); m.setEnabledProfiles(o.resourcePacks);
         mc.reloadResources();

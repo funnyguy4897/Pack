@@ -1,47 +1,1567 @@
-{"collections":[
-{"id":"crystal","name":"Crystal","preview":"textures/entity/end_crystal/end_crystal.png",
- "globs":["textures/entity/end_crystal/**","textures/block/obsidian.png"],
- "tint":["textures/entity/end_crystal/end_crystal.png","textures/entity/end_crystal/end_crystal_beam.png"],
- "styles":[{"name":"Aqua","hue":0.7},{"name":"Lavender","hue":0.95,"sat":0.6,"bri":1.15},{"name":"Blueberry","hue":0.85},{"name":"Ember","hue":0.25}]},
-{"id":"anchor","name":"Anchor","preview":"textures/block/respawn_anchor_top.png",
- "globs":["textures/block/respawn_anchor_*","models/block/respawn_anchor*","blockstates/respawn_anchor.json","textures/block/glowstone.png"],
- "tint":["textures/block/respawn_anchor_top.png","textures/block/respawn_anchor_top_off.png","textures/block/respawn_anchor_bottom.png","textures/block/respawn_anchor_side0.png","textures/block/respawn_anchor_side1.png","textures/block/respawn_anchor_side2.png","textures/block/respawn_anchor_side3.png","textures/block/respawn_anchor_side4.png","textures/block/glowstone.png"],
- "styles":[{"name":"Ember","hue":0.05},{"name":"Void","hue":0.6,"bri":0.85},{"name":"Mono","sat":0}]},
-{"id":"armor","name":"Armor","preview":"textures/item/netherite_chestplate.png",
- "globs":["textures/entity/equipment/**","textures/models/armor/**","textures/item/*_helmet.png","textures/item/*_chestplate.png","textures/item/*_leggings.png","textures/item/*_boots.png"],
- "tint":["textures/entity/equipment/humanoid/diamond.png","textures/entity/equipment/humanoid/netherite.png","textures/entity/equipment/humanoid_leggings/diamond.png","textures/entity/equipment/humanoid_leggings/netherite.png","textures/item/diamond_chestplate.png","textures/item/netherite_chestplate.png"],
- "styles":[{"name":"Crimson","hue":0.45},{"name":"Midnight","bri":0.6}]},
-{"id":"tools","name":"Tools","preview":"textures/item/netherite_sword.png",
- "globs":["textures/item/*_sword.png","textures/item/*_pickaxe.png","textures/item/*_axe.png","textures/item/*_shovel.png","textures/item/*_hoe.png","textures/item/bow*.png","textures/item/shield*"],
- "tint":["textures/item/diamond_sword.png","textures/item/netherite_sword.png","textures/item/diamond_axe.png","textures/item/netherite_axe.png","textures/item/diamond_pickaxe.png","textures/item/netherite_pickaxe.png"],
- "styles":[{"name":"Ruby","hue":0.45},{"name":"Gold","hue":0.35,"sat":1.2}]},
-{"id":"inventory","name":"Inventory","preview":"textures/gui/container/inventory.png",
- "globs":["textures/gui/container/**","textures/gui/sprites/container/**","textures/gui/sprites/hud/hotbar*"],
- "tint":["textures/gui/container/inventory.png","textures/gui/sprites/hud/hotbar.png"],
- "styles":[{"name":"Dark","bri":0.5},{"name":"Midnight","hue":0.65,"bri":0.6}]},
-{"id":"fire","name":"Fire","preview":"textures/block/fire_1.png",
- "globs":["textures/block/*fire_*.png"],
- "tint":["textures/block/fire_0.png","textures/block/fire_1.png"],
- "styles":[{"name":"Blue","hue":0.58},{"name":"Purple","hue":0.75},{"name":"Green","hue":0.3}]},
-{"id":"sky","name":"Sky","preview":"textures/environment/sun.png",
- "globs":["textures/environment/**","optifine/sky/**","mcpatcher/sky/**"],
- "tint":["textures/environment/sun.png","textures/environment/moon_phases.png","textures/environment/clouds.png"],
- "styles":[{"name":"Dusk","mul":"FFC4A8"},{"name":"Rose","hue":0.9,"mul":"FFB3D1"},{"name":"Midnight","bri":0.7,"mul":"9FB4FF"}]},
-{"id":"deepslate","name":"Deepslate","preview":"textures/block/deepslate.png",
- "globs":["textures/block/*deepslate*.png"],
- "tint":["textures/block/deepslate.png","textures/block/deepslate_top.png","textures/block/cobbled_deepslate.png"],
- "styles":[{"name":"Dark","bri":0.6},{"name":"Slate","hue":0.6,"sat":0.5}]},
-{"id":"stone","name":"Stone","preview":"textures/block/stone.png",
- "globs":["textures/block/stone.png","textures/block/cobblestone.png","textures/block/stone_bricks.png","textures/block/smooth_stone*.png"],
- "tint":["textures/block/stone.png","textures/block/cobblestone.png","textures/block/stone_bricks.png"],
- "styles":[{"name":"Black","bri":0.35},{"name":"Light","sat":0,"bri":1.3}]},
-{"id":"snow","name":"Snow","preview":"textures/block/snow.png",
- "globs":["textures/block/snow.png","textures/block/grass_block_snow.png","textures/block/powder_snow*.png"],
- "tint":["textures/block/snow.png","textures/block/powder_snow.png"],
- "styles":[{"name":"Ice","mul":"C8E6FF"},{"name":"Dim","bri":0.8}]},
-{"id":"items","name":"Items","group":"extras","preview":"textures/item/totem_of_undying.png",
- "globs":["textures/item/totem_of_undying.png","textures/item/golden_apple.png","textures/item/enchanted_golden_apple.png","textures/item/ender_pearl.png","textures/item/experience_bottle.png"],
- "tint":["textures/item/totem_of_undying.png","textures/item/ender_pearl.png"],
- "styles":[{"name":"Frost","hue":0.35}]},
-{"id":"particles","name":"Particles","group":"extras","preview":"textures/particle/flash.png","globs":["textures/particle/**"],"tint":[],"styles":[]}
-]}
+{
+"collections": [
+{
+"id": "crystal",
+"name": "Crystal",
+"group": "PvP",
+"globs": [
+"textures/entity/end_crystal/**"
+],
+"tint": [
+"textures/entity/end_crystal/end_crystal.png",
+"textures/entity/end_crystal/end_crystal_beam.png"
+],
+"styles": [
+{
+"name": "Aqua",
+"hue": 0.7
+},
+{
+"name": "Lavender",
+"hue": 0.95,
+"sat": 0.6,
+"bri": 1.15
+},
+{
+"name": "Blueberry",
+"hue": 0.85
+},
+{
+"name": "Ember",
+"hue": 0.25
+}
+],
+"preview": "textures/entity/end_crystal/end_crystal.png",
+"cube": "crystal"
+},
+{
+"id": "anchor",
+"name": "Anchor",
+"group": "PvP",
+"globs": [
+"textures/block/respawn_anchor_*",
+"models/block/respawn_anchor*",
+"blockstates/respawn_anchor.json"
+],
+"tint": [
+"textures/block/respawn_anchor_top.png",
+"textures/block/respawn_anchor_top_off.png",
+"textures/block/respawn_anchor_bottom.png",
+"textures/block/respawn_anchor_side0.png",
+"textures/block/respawn_anchor_side1.png",
+"textures/block/respawn_anchor_side2.png",
+"textures/block/respawn_anchor_side3.png",
+"textures/block/respawn_anchor_side4.png"
+],
+"styles": [
+{
+"name": "Ember",
+"hue": 0.05
+},
+{
+"name": "Void",
+"hue": 0.6,
+"bri": 0.85
+},
+{
+"name": "Mono",
+"sat": 0
+}
+],
+"preview": "textures/block/respawn_anchor_top.png",
+"cube": "block",
+"side": "textures/block/respawn_anchor_side4.png"
+},
+{
+"id": "glowstone",
+"name": "Glowstone",
+"group": "PvP",
+"globs": [
+"textures/block/glowstone.png"
+],
+"tint": [
+"textures/block/glowstone.png"
+],
+"styles": [
+{
+"name": "Ember",
+"hue": 0.05
+},
+{
+"name": "Ice",
+"hue": 0.5
+},
+{
+"name": "Violet",
+"hue": 0.7
+}
+],
+"preview": "textures/block/glowstone.png",
+"cube": "block"
+},
+{
+"id": "obsidian",
+"name": "Obsidian",
+"group": "PvP",
+"globs": [
+"textures/block/obsidian.png"
+],
+"tint": [
+"textures/block/obsidian.png"
+],
+"styles": [
+{
+"name": "Void",
+"hue": 0.75,
+"bri": 1.4
+},
+{
+"name": "Ember",
+"hue": 0.05,
+"bri": 1.6
+},
+{
+"name": "Ice",
+"hue": 0.55,
+"bri": 1.8
+}
+],
+"preview": "textures/block/obsidian.png",
+"cube": "block"
+},
+{
+"id": "crying",
+"name": "Crying Obsidian",
+"group": "PvP",
+"globs": [
+"textures/block/crying_obsidian.png"
+],
+"tint": [
+"textures/block/crying_obsidian.png"
+],
+"styles": [
+{
+"name": "Ember",
+"hue": 0.5
+},
+{
+"name": "Aqua",
+"hue": 0.7
+}
+],
+"preview": "textures/block/crying_obsidian.png",
+"cube": "block"
+},
+{
+"id": "totem",
+"name": "Totem",
+"group": "PvP",
+"globs": [
+"textures/item/totem_of_undying.png"
+],
+"tint": [
+"textures/item/totem_of_undying.png"
+],
+"styles": [
+{
+"name": "Frost",
+"hue": 0.35
+},
+{
+"name": "Crimson",
+"hue": 0.67
+},
+{
+"name": "Violet",
+"hue": 0.75
+}
+],
+"preview": "textures/item/totem_of_undying.png"
+},
+{
+"id": "fire",
+"name": "Fire",
+"group": "PvP",
+"globs": [
+"textures/block/fire_*.png"
+],
+"tint": [
+"textures/block/fire_0.png",
+"textures/block/fire_1.png"
+],
+"styles": [
+{
+"name": "Blue",
+"hue": 0.58
+},
+{
+"name": "Purple",
+"hue": 0.75
+},
+{
+"name": "Green",
+"hue": 0.3
+}
+],
+"preview": "textures/block/fire_1.png"
+},
+{
+"id": "soulfire",
+"name": "Soul Fire",
+"group": "PvP",
+"globs": [
+"textures/block/soul_fire_*.png"
+],
+"tint": [
+"textures/block/soul_fire_0.png",
+"textures/block/soul_fire_1.png"
+],
+"styles": [
+{
+"name": "Red",
+"hue": 0.5
+},
+{
+"name": "Gold",
+"hue": 0.3
+}
+],
+"preview": "textures/block/soul_fire_1.png"
+},
+{
+"id": "stone",
+"name": "Stone",
+"group": "PvP",
+"globs": [
+"textures/block/stone.png",
+"textures/block/smooth_stone*.png"
+],
+"tint": [
+"textures/block/stone.png"
+],
+"styles": [
+{
+"name": "Black",
+"bri": 0.35
+},
+{
+"name": "Light",
+"sat": 0,
+"bri": 1.3
+}
+],
+"preview": "textures/block/stone.png",
+"cube": "block"
+},
+{
+"id": "cobble",
+"name": "Cobblestone & Bricks",
+"group": "PvP",
+"globs": [
+"textures/block/cobblestone.png",
+"textures/block/stone_bricks.png",
+"textures/block/mossy_*.png"
+],
+"tint": [
+"textures/block/cobblestone.png",
+"textures/block/stone_bricks.png"
+],
+"styles": [
+{
+"name": "Black",
+"bri": 0.35
+},
+{
+"name": "Light",
+"sat": 0,
+"bri": 1.3
+}
+],
+"preview": "textures/block/cobblestone.png",
+"cube": "block"
+},
+{
+"id": "deepslate",
+"name": "Deepslate",
+"group": "PvP",
+"globs": [
+"textures/block/*deepslate*.png"
+],
+"tint": [
+"textures/block/deepslate.png",
+"textures/block/deepslate_top.png",
+"textures/block/cobbled_deepslate.png"
+],
+"styles": [
+{
+"name": "Dark",
+"bri": 0.6
+},
+{
+"name": "Slate",
+"hue": 0.6,
+"sat": 0.5
+}
+],
+"preview": "textures/block/deepslate.png",
+"cube": "block"
+},
+{
+"id": "snow",
+"name": "Snow",
+"group": "PvP",
+"globs": [
+"textures/block/snow.png",
+"textures/block/grass_block_snow.png",
+"textures/block/powder_snow*.png"
+],
+"tint": [
+"textures/block/snow.png",
+"textures/block/powder_snow.png"
+],
+"styles": [
+{
+"name": "Ice",
+"mul": "C8E6FF"
+},
+{
+"name": "Dim",
+"bri": 0.8
+}
+],
+"preview": "textures/block/snow.png",
+"cube": "block"
+},
+{
+"id": "sunmoon",
+"name": "Sun & Moon",
+"group": "PvP",
+"globs": [
+"textures/environment/celestial/**",
+"textures/environment/sun.png",
+"textures/environment/moon_phases.png"
+],
+"tint": [
+"textures/environment/celestial/sun.png",
+"textures/environment/celestial/moon/full_moon.png",
+"textures/environment/celestial/moon/waning_gibbous.png",
+"textures/environment/celestial/moon/third_quarter.png",
+"textures/environment/celestial/moon/waning_crescent.png",
+"textures/environment/celestial/moon/new_moon.png",
+"textures/environment/celestial/moon/waxing_crescent.png",
+"textures/environment/celestial/moon/first_quarter.png",
+"textures/environment/celestial/moon/waxing_gibbous.png"
+],
+"styles": [
+{
+"name": "Dusk",
+"mul": "FFC4A8"
+},
+{
+"name": "Rose",
+"hue": 0.9,
+"mul": "FFB3D1"
+},
+{
+"name": "Midnight",
+"bri": 0.7,
+"mul": "9FB4FF"
+}
+],
+"preview": "textures/environment/celestial/sun.png",
+"alt": "textures/environment/sun.png"
+},
+{
+"id": "clouds",
+"name": "Clouds",
+"group": "PvP",
+"globs": [
+"textures/environment/clouds.png"
+],
+"tint": [
+"textures/environment/clouds.png"
+],
+"styles": [
+{
+"name": "Dusk",
+"mul": "FFC4A8"
+},
+{
+"name": "Rose",
+"mul": "FFB3D1"
+},
+{
+"name": "Ice",
+"mul": "C8E6FF"
+},
+{
+"name": "Dark",
+"bri": 0.55
+}
+],
+"preview": "textures/environment/clouds.png"
+},
+{
+"id": "sword",
+"name": "Sword",
+"group": "Items",
+"globs": [
+"textures/item/*_sword.png"
+],
+"tint": [
+"textures/item/netherite_sword.png",
+"textures/item/diamond_sword.png"
+],
+"styles": [
+{
+"name": "Ruby",
+"hue": 0.45
+},
+{
+"name": "Gold",
+"hue": 0.35,
+"sat": 1.2
+},
+{
+"name": "Violet",
+"hue": 0.75
+}
+],
+"preview": "textures/item/netherite_sword.png"
+},
+{
+"id": "axe",
+"name": "Axe",
+"group": "Items",
+"globs": [
+"textures/item/*_axe.png"
+],
+"tint": [
+"textures/item/netherite_axe.png",
+"textures/item/diamond_axe.png"
+],
+"styles": [
+{
+"name": "Ruby",
+"hue": 0.45
+},
+{
+"name": "Gold",
+"hue": 0.35,
+"sat": 1.2
+},
+{
+"name": "Violet",
+"hue": 0.75
+}
+],
+"preview": "textures/item/netherite_axe.png"
+},
+{
+"id": "pickaxe",
+"name": "Pickaxe",
+"group": "Items",
+"globs": [
+"textures/item/*_pickaxe.png"
+],
+"tint": [
+"textures/item/netherite_pickaxe.png",
+"textures/item/diamond_pickaxe.png"
+],
+"styles": [
+{
+"name": "Ruby",
+"hue": 0.45
+},
+{
+"name": "Gold",
+"hue": 0.35,
+"sat": 1.2
+},
+{
+"name": "Violet",
+"hue": 0.75
+}
+],
+"preview": "textures/item/netherite_pickaxe.png"
+},
+{
+"id": "shovel",
+"name": "Shovel",
+"group": "Items",
+"globs": [
+"textures/item/*_shovel.png"
+],
+"tint": [
+"textures/item/netherite_shovel.png",
+"textures/item/diamond_shovel.png"
+],
+"styles": [
+{
+"name": "Ruby",
+"hue": 0.45
+},
+{
+"name": "Gold",
+"hue": 0.35,
+"sat": 1.2
+},
+{
+"name": "Violet",
+"hue": 0.75
+}
+],
+"preview": "textures/item/netherite_shovel.png"
+},
+{
+"id": "hoe",
+"name": "Hoe",
+"group": "Items",
+"globs": [
+"textures/item/*_hoe.png"
+],
+"tint": [
+"textures/item/netherite_hoe.png",
+"textures/item/diamond_hoe.png"
+],
+"styles": [
+{
+"name": "Ruby",
+"hue": 0.45
+},
+{
+"name": "Gold",
+"hue": 0.35,
+"sat": 1.2
+},
+{
+"name": "Violet",
+"hue": 0.75
+}
+],
+"preview": "textures/item/netherite_hoe.png"
+},
+{
+"id": "bow",
+"name": "Bow",
+"group": "Items",
+"globs": [
+"textures/item/bow*.png"
+],
+"tint": [
+"textures/item/bow.png",
+"textures/item/bow_pulling_0.png",
+"textures/item/bow_pulling_1.png",
+"textures/item/bow_pulling_2.png"
+],
+"styles": [
+{
+"name": "Dark",
+"bri": 0.6
+},
+{
+"name": "Violet",
+"hue": 0.75
+}
+],
+"preview": "textures/item/bow.png"
+},
+{
+"id": "crossbow",
+"name": "Crossbow",
+"group": "Items",
+"globs": [
+"textures/item/crossbow*.png"
+],
+"tint": [
+"textures/item/crossbow_standby.png"
+],
+"styles": [
+{
+"name": "Dark",
+"bri": 0.6
+},
+{
+"name": "Violet",
+"hue": 0.75
+}
+],
+"preview": "textures/item/crossbow_standby.png"
+},
+{
+"id": "arrow",
+"name": "Arrows",
+"group": "Items",
+"globs": [
+"textures/item/arrow.png",
+"textures/item/spectral_arrow.png",
+"textures/item/tipped_arrow*.png"
+],
+"tint": [
+"textures/item/arrow.png"
+],
+"styles": [
+{
+"name": "Ruby",
+"hue": 0.45
+},
+{
+"name": "Violet",
+"hue": 0.75
+}
+],
+"preview": "textures/item/arrow.png"
+},
+{
+"id": "shield",
+"name": "Shield",
+"group": "Items",
+"globs": [
+"textures/entity/shield/**",
+"textures/entity/shield*.png"
+],
+"tint": [
+"textures/entity/shield/shield_base_nopattern.png"
+],
+"styles": [
+{
+"name": "Dark",
+"bri": 0.6
+},
+{
+"name": "Violet",
+"hue": 0.75
+}
+],
+"preview": "textures/entity/shield/shield_base_nopattern.png"
+},
+{
+"id": "trident",
+"name": "Trident",
+"group": "Items",
+"globs": [
+"textures/item/trident*.png",
+"textures/entity/trident*.png"
+],
+"tint": [
+"textures/item/trident.png"
+],
+"styles": [
+{
+"name": "Ruby",
+"hue": 0.45
+},
+{
+"name": "Gold",
+"hue": 0.35,
+"sat": 1.2
+}
+],
+"preview": "textures/item/trident.png"
+},
+{
+"id": "mace",
+"name": "Mace",
+"group": "Items",
+"globs": [
+"textures/item/mace.png"
+],
+"tint": [
+"textures/item/mace.png"
+],
+"styles": [
+{
+"name": "Ruby",
+"hue": 0.45
+},
+{
+"name": "Violet",
+"hue": 0.75
+}
+],
+"preview": "textures/item/mace.png"
+},
+{
+"id": "elytra",
+"name": "Elytra",
+"group": "Items",
+"globs": [
+"textures/item/elytra.png",
+"textures/entity/elytra.png",
+"textures/entity/equipment/wings/**"
+],
+"tint": [
+"textures/item/elytra.png"
+],
+"styles": [
+{
+"name": "Ruby",
+"hue": 0.45
+},
+{
+"name": "Frost",
+"hue": 0.5
+}
+],
+"preview": "textures/item/elytra.png"
+},
+{
+"id": "rod",
+"name": "Fishing Rod",
+"group": "Items",
+"globs": [
+"textures/item/fishing_rod*.png",
+"textures/item/carrot_on_a_stick.png"
+],
+"tint": [],
+"styles": [],
+"preview": "textures/item/fishing_rod.png"
+},
+{
+"id": "flint",
+"name": "Flint & Steel / Shears",
+"group": "Items",
+"globs": [
+"textures/item/flint_and_steel.png",
+"textures/item/shears.png"
+],
+"tint": [],
+"styles": [],
+"preview": "textures/item/flint_and_steel.png"
+},
+{
+"id": "gapple",
+"name": "Golden Apple",
+"group": "Items",
+"globs": [
+"textures/item/golden_apple.png",
+"textures/item/golden_carrot.png"
+],
+"tint": [
+"textures/item/golden_apple.png"
+],
+"styles": [
+{
+"name": "Frost",
+"hue": 0.5
+},
+{
+"name": "Ruby",
+"hue": 0.9
+}
+],
+"preview": "textures/item/golden_apple.png"
+},
+{
+"id": "egapple",
+"name": "Enchanted Golden Apple",
+"group": "Items",
+"globs": [
+"textures/item/enchanted_golden_apple.png"
+],
+"tint": [
+"textures/item/enchanted_golden_apple.png"
+],
+"styles": [
+{
+"name": "Frost",
+"hue": 0.5
+},
+{
+"name": "Ruby",
+"hue": 0.9
+}
+],
+"preview": "textures/item/enchanted_golden_apple.png"
+},
+{
+"id": "pearl",
+"name": "Ender Pearl",
+"group": "Items",
+"globs": [
+"textures/item/ender_pearl.png"
+],
+"tint": [
+"textures/item/ender_pearl.png"
+],
+"styles": [
+{
+"name": "Ruby",
+"hue": 0.75
+},
+{
+"name": "Gold",
+"hue": 0.45
+}
+],
+"preview": "textures/item/ender_pearl.png"
+},
+{
+"id": "xp",
+"name": "Experience Bottle",
+"group": "Items",
+"globs": [
+"textures/item/experience_bottle.png"
+],
+"tint": [
+"textures/item/experience_bottle.png"
+],
+"styles": [
+{
+"name": "Ruby",
+"hue": 0.6
+},
+{
+"name": "Violet",
+"hue": 0.75
+}
+],
+"preview": "textures/item/experience_bottle.png"
+},
+{
+"id": "potion",
+"name": "Potions",
+"group": "Items",
+"globs": [
+"textures/item/*potion*.png",
+"textures/item/glass_bottle.png"
+],
+"tint": [
+"textures/item/splash_potion.png",
+"textures/item/potion.png"
+],
+"styles": [
+{
+"name": "Ruby",
+"hue": 0.45
+},
+{
+"name": "Violet",
+"hue": 0.75
+}
+],
+"preview": "textures/item/splash_potion.png"
+},
+{
+"id": "armorworn",
+"name": "Armor (worn)",
+"group": "Items",
+"globs": [
+"textures/entity/equipment/humanoid/**",
+"textures/entity/equipment/humanoid_leggings/**",
+"textures/models/armor/**"
+],
+"tint": [
+"textures/entity/equipment/humanoid/diamond.png",
+"textures/entity/equipment/humanoid/netherite.png",
+"textures/entity/equipment/humanoid_leggings/diamond.png",
+"textures/entity/equipment/humanoid_leggings/netherite.png"
+],
+"styles": [
+{
+"name": "Crimson",
+"hue": 0.45
+},
+{
+"name": "Midnight",
+"bri": 0.6
+}
+],
+"preview": "textures/item/netherite_chestplate.png"
+},
+{
+"id": "helmet",
+"name": "Helmets",
+"group": "Items",
+"globs": [
+"textures/item/*_helmet.png"
+],
+"tint": [
+"textures/item/netherite_helmet.png",
+"textures/item/diamond_helmet.png"
+],
+"styles": [
+{
+"name": "Crimson",
+"hue": 0.45
+},
+{
+"name": "Midnight",
+"bri": 0.6
+}
+],
+"preview": "textures/item/netherite_helmet.png"
+},
+{
+"id": "chestplate",
+"name": "Chestplates",
+"group": "Items",
+"globs": [
+"textures/item/*_chestplate.png"
+],
+"tint": [
+"textures/item/netherite_chestplate.png",
+"textures/item/diamond_chestplate.png"
+],
+"styles": [
+{
+"name": "Crimson",
+"hue": 0.45
+},
+{
+"name": "Midnight",
+"bri": 0.6
+}
+],
+"preview": "textures/item/netherite_chestplate.png"
+},
+{
+"id": "leggings",
+"name": "Leggings",
+"group": "Items",
+"globs": [
+"textures/item/*_leggings.png"
+],
+"tint": [
+"textures/item/netherite_leggings.png",
+"textures/item/diamond_leggings.png"
+],
+"styles": [
+{
+"name": "Crimson",
+"hue": 0.45
+},
+{
+"name": "Midnight",
+"bri": 0.6
+}
+],
+"preview": "textures/item/netherite_leggings.png"
+},
+{
+"id": "boots",
+"name": "Boots",
+"group": "Items",
+"globs": [
+"textures/item/*_boots.png"
+],
+"tint": [
+"textures/item/netherite_boots.png",
+"textures/item/diamond_boots.png"
+],
+"styles": [
+{
+"name": "Crimson",
+"hue": 0.45
+},
+{
+"name": "Midnight",
+"bri": 0.6
+}
+],
+"preview": "textures/item/netherite_boots.png"
+},
+{
+"id": "water",
+"name": "Water",
+"group": "Blocks",
+"globs": [
+"textures/block/water_*.png"
+],
+"tint": [],
+"styles": [],
+"preview": "textures/block/water_still.png",
+"cube": "block"
+},
+{
+"id": "lava",
+"name": "Lava",
+"group": "Blocks",
+"globs": [
+"textures/block/lava_*.png"
+],
+"tint": [
+"textures/block/lava_still.png",
+"textures/block/lava_flow.png"
+],
+"styles": [
+{
+"name": "Blue",
+"hue": 0.55
+},
+{
+"name": "Green",
+"hue": 0.3
+}
+],
+"preview": "textures/block/lava_still.png",
+"cube": "block"
+},
+{
+"id": "grass",
+"name": "Grass & Dirt",
+"group": "Blocks",
+"globs": [
+"textures/block/grass_block_*.png",
+"textures/block/dirt.png",
+"textures/block/podzol_*.png",
+"textures/block/mycelium_*.png"
+],
+"tint": [],
+"styles": [],
+"preview": "textures/block/dirt.png",
+"cube": "block"
+},
+{
+"id": "planks",
+"name": "Planks",
+"group": "Blocks",
+"globs": [
+"textures/block/*_planks.png"
+],
+"tint": [],
+"styles": [],
+"preview": "textures/block/oak_planks.png",
+"cube": "block"
+},
+{
+"id": "logs",
+"name": "Logs",
+"group": "Blocks",
+"globs": [
+"textures/block/*_log.png",
+"textures/block/*_log_top.png"
+],
+"tint": [],
+"styles": [],
+"preview": "textures/block/oak_log.png",
+"cube": "block",
+"side": "textures/block/oak_log.png"
+},
+{
+"id": "ores",
+"name": "Ores",
+"group": "Blocks",
+"globs": [
+"textures/block/*_ore.png",
+"textures/block/ancient_debris_*.png"
+],
+"tint": [],
+"styles": [],
+"preview": "textures/block/diamond_ore.png",
+"cube": "block"
+},
+{
+"id": "sand",
+"name": "Sand & Gravel",
+"group": "Blocks",
+"globs": [
+"textures/block/sand.png",
+"textures/block/red_sand.png",
+"textures/block/gravel.png"
+],
+"tint": [],
+"styles": [],
+"preview": "textures/block/sand.png",
+"cube": "block"
+},
+{
+"id": "glass",
+"name": "Glass",
+"group": "Blocks",
+"globs": [
+"textures/block/glass.png",
+"textures/block/*_stained_glass.png"
+],
+"tint": [],
+"styles": [],
+"preview": "textures/block/glass.png",
+"cube": "block"
+},
+{
+"id": "nether",
+"name": "Netherrack",
+"group": "Blocks",
+"globs": [
+"textures/block/netherrack.png",
+"textures/block/nether_bricks.png",
+"textures/block/soul_sand.png",
+"textures/block/soul_soil.png",
+"textures/block/basalt_*.png",
+"textures/block/blackstone*.png"
+],
+"tint": [],
+"styles": [],
+"preview": "textures/block/netherrack.png",
+"cube": "block"
+},
+{
+"id": "leaves",
+"name": "Leaves",
+"group": "Blocks",
+"globs": [
+"textures/block/*_leaves.png"
+],
+"tint": [],
+"styles": [],
+"preview": "textures/block/oak_leaves.png",
+"cube": "block"
+},
+{
+"id": "bedrock",
+"name": "Bedrock",
+"group": "Blocks",
+"globs": [
+"textures/block/bedrock.png"
+],
+"tint": [
+"textures/block/bedrock.png"
+],
+"styles": [
+{
+"name": "Dark",
+"bri": 0.6
+},
+{
+"name": "Violet",
+"hue": 0.75
+}
+],
+"preview": "textures/block/bedrock.png",
+"cube": "block"
+},
+{
+"id": "endstone",
+"name": "End Stone",
+"group": "Blocks",
+"globs": [
+"textures/block/end_stone*.png",
+"textures/block/purpur_*.png"
+],
+"tint": [],
+"styles": [],
+"preview": "textures/block/end_stone.png",
+"cube": "block"
+},
+{
+"id": "cobweb",
+"name": "Cobweb",
+"group": "Blocks",
+"globs": [
+"textures/block/cobweb.png"
+],
+"tint": [],
+"styles": [],
+"preview": "textures/block/cobweb.png",
+"cube": "block"
+},
+{
+"id": "tnt",
+"name": "TNT",
+"group": "Blocks",
+"globs": [
+"textures/block/tnt_*.png"
+],
+"tint": [],
+"styles": [],
+"preview": "textures/block/tnt_side.png",
+"cube": "block",
+"side": "textures/block/tnt_side.png"
+},
+{
+"id": "endsky",
+"name": "End Sky",
+"group": "World",
+"globs": [
+"textures/environment/end_sky.png",
+"textures/environment/celestial/end_flash.png",
+"textures/environment/end_flash.png"
+],
+"tint": [
+"textures/environment/end_sky.png"
+],
+"styles": [
+{
+"name": "Violet",
+"hue": 0.1
+},
+{
+"name": "Dark",
+"bri": 0.5
+}
+],
+"preview": "textures/environment/end_sky.png"
+},
+{
+"id": "weather",
+"name": "Rain & Snow",
+"group": "World",
+"globs": [
+"textures/environment/rain.png",
+"textures/environment/snow.png"
+],
+"tint": [
+"textures/environment/rain.png"
+],
+"styles": [
+{
+"name": "Ice",
+"mul": "C8E6FF"
+}
+],
+"preview": "textures/environment/rain.png"
+},
+{
+"id": "skybox",
+"name": "Skybox (OptiFine)",
+"group": "World",
+"globs": [
+"optifine/sky/**",
+"mcpatcher/sky/**"
+],
+"tint": [],
+"styles": []
+},
+{
+"id": "particles",
+"name": "Particles",
+"group": "World",
+"globs": [
+"textures/particle/**"
+],
+"tint": [],
+"styles": [],
+"preview": "textures/particle/flash.png"
+},
+{
+"id": "hotbar",
+"name": "Hotbar",
+"group": "HUD & GUI",
+"globs": [
+"textures/gui/sprites/hud/hotbar.png",
+"textures/gui/sprites/hud/hotbar_offhand_*.png",
+"textures/gui/widgets.png"
+],
+"tint": [
+"textures/gui/sprites/hud/hotbar.png"
+],
+"styles": [
+{
+"name": "Violet",
+"mul": "C9B6FF"
+},
+{
+"name": "Mint",
+"mul": "B6FFD6"
+},
+{
+"name": "Dark",
+"bri": 0.5
+}
+],
+"preview": "textures/gui/sprites/hud/hotbar.png"
+},
+{
+"id": "hotbarsel",
+"name": "Hotbar Selection",
+"group": "HUD & GUI",
+"globs": [
+"textures/gui/sprites/hud/hotbar_selection.png"
+],
+"tint": [
+"textures/gui/sprites/hud/hotbar_selection.png"
+],
+"styles": [
+{
+"name": "Violet",
+"mul": "C9B6FF"
+},
+{
+"name": "Mint",
+"mul": "B6FFD6"
+},
+{
+"name": "Red",
+"mul": "FF6B6B"
+}
+],
+"preview": "textures/gui/sprites/hud/hotbar_selection.png"
+},
+{
+"id": "hearts",
+"name": "Hearts",
+"group": "HUD & GUI",
+"globs": [
+"textures/gui/sprites/hud/heart/**"
+],
+"tint": [
+"textures/gui/sprites/hud/heart/full.png",
+"textures/gui/sprites/hud/heart/half.png",
+"textures/gui/sprites/hud/heart/container.png"
+],
+"styles": [
+{
+"name": "Blue",
+"hue": 0.6
+},
+{
+"name": "Green",
+"hue": 0.33
+},
+{
+"name": "Gold",
+"hue": 0.13
+}
+],
+"preview": "textures/gui/sprites/hud/heart/full.png"
+},
+{
+"id": "hunger",
+"name": "Hunger",
+"group": "HUD & GUI",
+"globs": [
+"textures/gui/sprites/hud/food_*.png"
+],
+"tint": [
+"textures/gui/sprites/hud/food_full.png",
+"textures/gui/sprites/hud/food_half.png"
+],
+"styles": [
+{
+"name": "Blue",
+"hue": 0.6
+},
+{
+"name": "Green",
+"hue": 0.33
+}
+],
+"preview": "textures/gui/sprites/hud/food_full.png"
+},
+{
+"id": "armorbar",
+"name": "Armor Bar",
+"group": "HUD & GUI",
+"globs": [
+"textures/gui/sprites/hud/armor_*.png"
+],
+"tint": [
+"textures/gui/sprites/hud/armor_full.png",
+"textures/gui/sprites/hud/armor_half.png"
+],
+"styles": [
+{
+"name": "Gold",
+"hue": 0.13
+},
+{
+"name": "Red",
+"hue": 0.9
+}
+],
+"preview": "textures/gui/sprites/hud/armor_full.png"
+},
+{
+"id": "xpbar",
+"name": "XP Bar",
+"group": "HUD & GUI",
+"globs": [
+"textures/gui/sprites/hud/experience_bar_*.png"
+],
+"tint": [
+"textures/gui/sprites/hud/experience_bar_progress.png"
+],
+"styles": [
+{
+"name": "Blue",
+"hue": 0.45
+},
+{
+"name": "Pink",
+"hue": 0.8
+}
+],
+"preview": "textures/gui/sprites/hud/experience_bar_progress.png"
+},
+{
+"id": "crosshair",
+"name": "Crosshair",
+"group": "HUD & GUI",
+"globs": [
+"textures/gui/sprites/hud/crosshair*.png"
+],
+"tint": [
+"textures/gui/sprites/hud/crosshair.png"
+],
+"styles": [
+{
+"name": "Lime",
+"mul": "7CFF7C"
+},
+{
+"name": "Violet",
+"mul": "C9A8FF"
+},
+{
+"name": "Red",
+"mul": "FF6B6B"
+}
+],
+"preview": "textures/gui/sprites/hud/crosshair.png"
+},
+{
+"id": "inventory",
+"name": "Inventory",
+"group": "HUD & GUI",
+"globs": [
+"textures/gui/container/**",
+"textures/gui/sprites/container/**"
+],
+"tint": [
+"textures/gui/container/inventory.png"
+],
+"styles": [
+{
+"name": "Dark",
+"bri": 0.5
+},
+{
+"name": "Midnight",
+"hue": 0.65,
+"bri": 0.6
+}
+],
+"preview": "textures/gui/container/inventory.png"
+},
+{
+"id": "buttons",
+"name": "Buttons & Widgets",
+"group": "HUD & GUI",
+"globs": [
+"textures/gui/sprites/widget/**"
+],
+"tint": [
+"textures/gui/sprites/widget/button.png",
+"textures/gui/sprites/widget/button_highlighted.png"
+],
+"styles": [
+{
+"name": "Violet",
+"hue": 0.75
+},
+{
+"name": "Dark",
+"bri": 0.5
+}
+],
+"preview": "textures/gui/sprites/widget/button.png"
+},
+{
+"id": "tooltips",
+"name": "Tooltips",
+"group": "HUD & GUI",
+"globs": [
+"textures/gui/sprites/tooltip/**"
+],
+"tint": [],
+"styles": [],
+"preview": "textures/gui/sprites/tooltip/background.png"
+},
+{
+"id": "menubg",
+"name": "Menu Backgrounds",
+"group": "HUD & GUI",
+"globs": [
+"textures/gui/menu_background.png",
+"textures/gui/inworld_menu_background.png",
+"textures/gui/title/**"
+],
+"tint": [],
+"styles": [],
+"preview": "textures/gui/menu_background.png"
+},
+{
+"id": "fonts",
+"name": "Fonts",
+"group": "HUD & GUI",
+"globs": [
+"font/**",
+"textures/font/**"
+],
+"tint": [],
+"styles": []
+},
+{
+"id": "s_totem",
+"name": "Totem Pop Sound",
+"group": "Sounds",
+"globs": [
+"sounds/item/totem/**"
+],
+"tint": [],
+"styles": []
+},
+{
+"id": "s_hit",
+"name": "Hit Sounds",
+"group": "Sounds",
+"globs": [
+"sounds/entity/player/attack/**"
+],
+"tint": [],
+"styles": []
+},
+{
+"id": "s_hurt",
+"name": "Hurt Sounds",
+"group": "Sounds",
+"globs": [
+"sounds/damage/**",
+"sounds/entity/player/hurt/**"
+],
+"tint": [],
+"styles": []
+},
+{
+"id": "s_boom",
+"name": "Explosions",
+"group": "Sounds",
+"globs": [
+"sounds/random/explode*"
+],
+"tint": [],
+"styles": []
+},
+{
+"id": "s_bow",
+"name": "Bow Sounds",
+"group": "Sounds",
+"globs": [
+"sounds/random/bow*"
+],
+"tint": [],
+"styles": []
+},
+{
+"id": "s_anchor",
+"name": "Anchor Sounds",
+"group": "Sounds",
+"globs": [
+"sounds/block/respawn_anchor/**"
+],
+"tint": [],
+"styles": []
+},
+{
+"id": "s_all",
+"name": "All Sounds",
+"group": "Sounds",
+"globs": [
+"sounds/**",
+"sounds.json"
+],
+"tint": [],
+"styles": []
+}
+]
+}
