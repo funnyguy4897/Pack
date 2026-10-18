@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "packmixer",
+  "version": "${version}",
+  "name": "Pack Mixer",
+  "description": "Mix and match individual parts of resource packs: crystals, anchors, sky, stone and more. Press K to open.",
+  "authors": [
+    "Pack Mixer"
+  ],
+  "license": "MIT",
+  "icon": "assets/packmixer/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "dev.packmixer.PackMixerMod"
+    ],
+    "modmenu": [
+      "dev.packmixer.ModMenuIntegration"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.18.0",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "badges": [
+        "client"
+      ]
+    }
+  }
+}
