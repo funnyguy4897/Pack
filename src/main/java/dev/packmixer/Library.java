@@ -216,7 +216,7 @@ public final class Library {
         deleteTree(out);
         try {
             Files.createDirectories(out);
-            Files.writeString(out.resolve("pack.mcmeta"), "{\"pack\":{\"pack_format\":75,\"description\":\"Pack Mixer loadout\"}}");
+            Files.writeString(out.resolve("pack.mcmeta"), "{\"pack\":{\"description\":\"Pack Mixer loadout\",\"min_format\":69,\"max_format\":999}}");
             for (var e : sel.entrySet()) {
                 Style s = styles.getOrDefault(e.getKey(), List.of()).stream().filter(x -> x.id.equals(e.getValue())).findFirst().orElse(null);
                 if (s == null) continue;

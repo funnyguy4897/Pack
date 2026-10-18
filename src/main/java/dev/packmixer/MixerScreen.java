@@ -121,10 +121,31 @@ public class MixerScreen extends Screen {
     }
 
     // ---- render ----
+    Throwable error; boolean pushed;
+
+    /** Never crashes the game: any drawing error is shown on screen (and printed to the log) instead. */
     @Override public void render(DrawContext g, int rmx, int rmy, float d) {
+        try { if (error == null) draw(g, rmx, rmy, d); }
+        catch (Throwable t) { error = t; t.printStackTrace(); if (pushed) { pushed = false; try { g.getMatrices().popMatrix(); } catch (Throwable ignored) {} } }
+        if (error != null) {
+            g.fill(0, 0, width, height, 0xCC000000);
+            g.drawCenteredTextWithShadow(textRenderer, "Pack Mixer hit an error (press Esc). Please report this:", width / 2, height / 2 - 20, 0xFFFF8080);
+            g.drawCenteredTextWithShadow(textRenderer, String.valueOf(error), width / 2, height / 2 - 6, 0xFFFFFFFF);
+            StackTraceElement[] st = error.getStackTrace();
+            for (int i = 0; i < Math.min(3, st.length); i++) g.drawCenteredTextWithShadow(textRenderer, st[i].toString(), width / 2, height / 2 + 10 + i * 11, 0xFFC9C2DB);
+        }
+    }
+
+    /** Another mod may already have blurred this frame (the game only allows one blur), so fall back to plain darkening. */
+    void backdrop(DrawContext g, int rmx, int rmy, float d) {
+        try { if (Ui.d.blur || client.world == null) renderBackground(g, rmx, rmy, d); else g.fill(0, 0, width, height, 0x66000000); }
+        catch (IllegalStateException e) { g.fill(0, 0, width, height, 0x66000000); }
+    }
+
+    void draw(DrawContext g, int rmx, int rmy, float d) {
         layout(); int mx = (int) (rmx / sc), my = (int) (rmy / sc); long now = System.currentTimeMillis();
-        if (Ui.d.blur || client.world == null) renderBackground(g, rmx, rmy, d); else g.fill(0, 0, width, height, 0x66000000);
-        var m = g.getMatrices(); m.pushMatrix(); m.scale(sc, sc);
+        backdrop(g, rmx, rmy, d);
+        var m = g.getMatrices(); m.pushMatrix(); pushed = true; m.scale(sc, sc);
         glass(g, x0, y0, PW, PH, R1(), Ui.d.alpha << 24 | Ui.d.tint, 0x66FFFFFF);
 
         // header + loadout (first group = PvP)
@@ -218,7 +239,7 @@ public class MixerScreen extends Screen {
             }
         }
         if (now - toastAt < 3500) g.drawCenteredTextWithShadow(textRenderer, toast, x0 + PW / 2, y0 + 34, GRN);
-        m.popMatrix();
+        m.popMatrix(); pushed = false;
     }
 
     void stepper(DrawContext g, String label, String value, int rx, int y) {
