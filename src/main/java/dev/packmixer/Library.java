@@ -3,9 +3,7 @@ package dev.packmixer;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.resource.ResourceType;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.Minecraft;
 
 import javax.imageio.ImageIO;
 import java.awt.Color;
@@ -43,7 +41,7 @@ public final class Library {
     static void write(Path p, Object o) { try { Files.createDirectories(p.getParent()); Files.writeString(p, G.toJson(o)); } catch (IOException e) { e.printStackTrace(); } }
     public static void save() { write(ROOT.resolve("selection.json"), sel); write(ROOT.resolve("favorites.json"), favs); write(ROOT.resolve("presets.json"), presets); }
 
-    public static void init(MinecraftClient mc) {
+    public static void init(Minecraft mc) {
         try (var r = new InputStreamReader(Library.class.getResourceAsStream("/packmixer/collections.json"))) { cols = G.fromJson(r, Root.class).collections; }
         catch (Exception e) { throw new RuntimeException(e); }
         purgeIfOutdated();
@@ -60,21 +58,18 @@ public final class Library {
     }
 
     /** Built-in styles are original recolours generated from the vanilla textures on this machine. */
-    static void makeBuiltin(MinecraftClient mc, Col c, StyleDef d, Path dir) {
+    static void makeBuiltin(Minecraft mc, Col c, StyleDef d, Path dir) {
         try {
-            var pack = mc.getDefaultResourcePack(); int n = 0;
+            int n = 0; ClassLoader cl = Library.class.getClassLoader();
             for (String f : c.tint) {
-                var in = pack.open(ResourceType.CLIENT_RESOURCES, Identifier.of("minecraft", f));
-                if (in == null) continue;
-                BufferedImage src; try (var is = in.get()) { src = ImageIO.read(is); }
+                BufferedImage src; try (var is = cl.getResourceAsStream("assets/minecraft/" + f)) { if (is == null) continue; src = ImageIO.read(is); }
                 BufferedImage img = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TYPE_INT_ARGB);
                 img.getGraphics().drawImage(src, 0, 0, null);
                 tint(img, d);
                 Path out = dir.resolve("assets/minecraft/" + f);
                 Files.createDirectories(out.getParent());
                 ImageIO.write(img, "png", out.toFile()); n++;
-                var meta = pack.open(ResourceType.CLIENT_RESOURCES, Identifier.of("minecraft", f + ".mcmeta"));
-                if (meta != null) try (var is = meta.get()) { Files.copy(is, Path.of(out + ".mcmeta"), StandardCopyOption.REPLACE_EXISTING); }
+                try (var is = cl.getResourceAsStream("assets/minecraft/" + f + ".mcmeta")) { if (is != null) Files.copy(is, Path.of(out + ".mcmeta"), StandardCopyOption.REPLACE_EXISTING); }
             }
             if (n > 0) { Style s = new Style(); s.name = d.name; s.author = "Pack Mixer"; s.builtin = true; write(dir.resolve("style.json"), s); }
         } catch (Exception e) { e.printStackTrace(); }
@@ -211,8 +206,8 @@ public final class Library {
     }
 
     /** Builds resourcepacks/PackMixer from the current selection, enables it on top, and reloads. */
-    public static void compose(MinecraftClient mc) {
-        Path out = mc.getResourcePackDir().resolve("PackMixer");
+    public static void compose(Minecraft mc) {
+        Path out = mc.getResourcePackDirectory().resolve("PackMixer");
         deleteTree(out);
         try {
             Files.createDirectories(out);
@@ -230,8 +225,8 @@ public final class Library {
             }
         } catch (IOException e) { e.printStackTrace(); }
         legacySky(out.resolve("assets/minecraft"));
-        var o = mc.options; o.resourcePacks.remove(PACK_ID); o.resourcePacks.add(PACK_ID); o.write();
-        var m = mc.getResourcePackManager(); m.scanPacks(); m.setEnabledProfiles(o.resourcePacks);
-        mc.reloadResources();
+        var o = mc.options; o.resourcePacks.remove(PACK_ID); o.resourcePacks.add(PACK_ID); o.save();
+        var m = mc.getResourcePackRepository(); m.reload(); m.setSelected(o.resourcePacks);
+        mc.reloadResourcePacks();
     }
 }
